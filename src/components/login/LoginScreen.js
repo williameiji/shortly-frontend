@@ -12,7 +12,7 @@ export default function LoginScreen() {
 		email: "",
 		password: "",
 	});
-	const {} = useContext(UserContext);
+	const { setUserInformation } = useContext(UserContext);
 	const navigate = useNavigate();
 
 	function handleFormChange(e) {
@@ -21,19 +21,14 @@ export default function LoginScreen() {
 		setLoginDataInput(loginData);
 	}
 
-	let config = {
-		headers: {
-			...loginDataInput,
-		},
-	};
-
 	function login(e) {
 		e.preventDefault();
 
 		axios
-			.post(url.signin, {}, config)
+			.post(url.signin, loginDataInput)
 			.then((response) => {
-				navigate("/");
+				setUserInformation(response.data);
+				navigate("/main");
 			})
 			.catch((err) => {
 				alert(err);
