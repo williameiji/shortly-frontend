@@ -6,7 +6,7 @@ import UserContext from "../context/UserContext";
 
 export default function TopBar() {
 	const navigate = useNavigate();
-	const { userInformation } = useContext(UserContext);
+	const { userInformation, setUserInformation } = useContext(UserContext);
 
 	function goToSignup() {
 		navigate("/signup");
@@ -24,6 +24,11 @@ export default function TopBar() {
 		navigate("/main");
 	}
 
+	function logout() {
+		setUserInformation(null);
+		navigate("/");
+	}
+
 	return (
 		<>
 			{userInformation ? (
@@ -31,7 +36,7 @@ export default function TopBar() {
 					<Box>
 						<div onClick={goToMain}>Home</div>
 						<div onClick={goToRanking}>Ranking</div>
-						<div onClick={goToSignup}>Sair</div>
+						<div onClick={logout}>Sair</div>
 					</Box>
 					<HelloBox>Seja bem-vindo(a), {userInformation.name}</HelloBox>
 				</>
