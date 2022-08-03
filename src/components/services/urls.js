@@ -1,10 +1,10 @@
 const url = {
-	signup: "http://localhost:4000/signup",
-	signin: "http://localhost:4000/signin",
-	rank: "http://localhost:4000/ranking",
-	short: "http://localhost:4000/urls/shorten",
-	links: "http://localhost:4000/urls",
-	open: "http://localhost:4000/urls/open",
+	signup: "https://shortly-back.herokuapp.com/signup",
+	signin: "https://shortly-back.herokuapp.com/signin",
+	rank: "https://shortly-back.herokuapp.com/ranking",
+	short: "https://shortly-back.herokuapp.com/urls/shorten",
+	links: "https://shortly-back.herokuapp.com/urls",
+	open: "https://shortly-back.herokuapp.com/urls/open",
 };
 
 export default url;

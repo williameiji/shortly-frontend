@@ -74,6 +74,7 @@ export default function Main() {
 
 	function openLink(shortUrl) {
 		window.open(`${url.open}/${shortUrl}`);
+		setControl(true);
 	}
 
 	return (
