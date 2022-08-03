@@ -114,4 +114,5 @@ const Button = styled.button`
 	color: white;
 	font-size: 20px;
 	border: none;
+	font-family: "Lexend Deca";
 `;
