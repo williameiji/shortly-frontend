@@ -11,13 +11,21 @@ import Ranking from "./ranking/Ranking";
 import Main from "./main/Main";
 
 export default function App() {
+	const [rankingData, setRankingData] = useState([]);
 	const [userInformation, setUserInformation] = useState(null);
 	return (
 		<>
 			<GlobalResetStyle />
 			<GlobalStyle />
 			<BrowserRouter>
-				<UserContext.Provider value={{ setUserInformation, userInformation }}>
+				<UserContext.Provider
+					value={{
+						setUserInformation,
+						userInformation,
+						setRankingData,
+						rankingData,
+					}}
+				>
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/signup" element={<SignupScreen />} />

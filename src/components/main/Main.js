@@ -6,6 +6,7 @@ import Home from "../home/Home";
 import UserContext from "../context/UserContext";
 import url from "../services/urls";
 import trash from "../../assets/images/trashcan.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
 	const [linkDataInput, setLinkDataInput] = useState({
@@ -14,6 +15,7 @@ export default function Main() {
 	const [linksFromUser, setLinksFromUser] = useState(null);
 	const [control, setControl] = useState(true);
 	const { userInformation } = useContext(UserContext);
+	const navigate = useNavigate();
 
 	let config = {
 		headers: {
@@ -35,25 +37,31 @@ export default function Main() {
 				setLinksFromUser(response.data);
 			})
 			.catch((err) => {
-				alert(err);
+				alert(err.response.data);
+				if (err.response.status === 401) {
+					navigate("/");
+				}
 			});
 	}
 
-	function shortLink(e) {
+	async function shortLink(e) {
 		e.preventDefault();
 
-		axios
+		await axios
 			.post(url.short, linkDataInput, config)
 			.then((response) => {
 				setControl(true);
+				setLinkDataInput({
+					link: "",
+				});
 			})
 			.catch((err) => {
 				alert(err);
 			});
 	}
 
-	function deleteLink(id) {
-		axios
+	async function deleteLink(id) {
+		await axios
 			.delete(`${url.links}/${id}`, config)
 			.then((response) => {
 				alert("Link deletado!");
@@ -65,15 +73,7 @@ export default function Main() {
 	}
 
 	function openLink(shortUrl) {
-		axios
-			.get(`${url.open}/${shortUrl}`, config)
-			.then((response) => {
-				window.open(response.data.redirect);
-				setControl(true);
-			})
-			.catch((err) => {
-				alert(err);
-			});
+		window.open(`${url.open}/${shortUrl}`);
 	}
 
 	return (

@@ -1,16 +1,33 @@
 import styled from "styled-components";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import TopBar from "../topBar/TopBar";
 import logo from "../../assets/images/logo-shortly.png";
-import Ranking from "../ranking/Ranking";
+import UserContext from "../context/UserContext";
+import BodyRanking from "../ranking/BodyRanking";
+import url from "../services/urls";
 
 export default function Home(props) {
 	const navigate = useNavigate();
 
+	const { setRankingData, rankingData } = useContext(UserContext);
+
 	function goToSignup() {
 		navigate("/signup");
 	}
+
+	useEffect(() => {
+		axios
+			.get(url.rank)
+			.then((response) => {
+				setRankingData(response.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
 	return (
 		<>
@@ -22,7 +39,7 @@ export default function Home(props) {
 						props.children
 					) : (
 						<>
-							<Ranking />
+							<BodyRanking rankingData={rankingData} />
 							<Bottom onClick={goToSignup}>
 								Crie sua conta para usar nosso serviço!
 							</Bottom>

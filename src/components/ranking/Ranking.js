@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import axios from "axios";
 
 import BodyRanking from "./BodyRanking";
@@ -7,8 +7,7 @@ import Home from "../home/Home";
 import UserContext from "../context/UserContext";
 
 export default function Ranking() {
-	const [rankingData, setRankingData] = useState([]);
-	const { userInformation } = useContext(UserContext);
+	const { setRankingData, rankingData } = useContext(UserContext);
 
 	useEffect(() => {
 		axios
@@ -22,16 +21,8 @@ export default function Ranking() {
 	}, []);
 
 	return (
-		<>
-			{userInformation ? (
-				<Home>
-					<BodyRanking rankingData={rankingData} />
-				</Home>
-			) : (
-				<>
-					<BodyRanking rankingData={rankingData} />
-				</>
-			)}
-		</>
+		<Home>
+			<BodyRanking rankingData={rankingData} />
+		</Home>
 	);
 }
