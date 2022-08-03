@@ -1,10 +1,21 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function TopBar() {
+	const navigate = useNavigate();
+
+	function goToSignup() {
+		navigate("/signup");
+	}
+
+	function goToSignin() {
+		navigate("/signin");
+	}
+
 	return (
 		<Box>
-			<div>Entrar</div>
-			<div>Cadastrar-se</div>
+			<div onClick={goToSignin}>Entrar</div>
+			<div onClick={goToSignup}>Cadastrar-se</div>
 		</Box>
 	);
 }
