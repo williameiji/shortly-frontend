@@ -165,7 +165,6 @@ const BoxLinks = styled.div`
 	padding: 20px;
 	position: relative;
 	cursor: pointer;
-	overflow: hidden;
 
 	:hover span {
 		visibility: visible;
