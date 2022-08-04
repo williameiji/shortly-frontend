@@ -56,7 +56,12 @@ export default function Main() {
 				});
 			})
 			.catch((err) => {
-				alert(err);
+				if (err.response.status === 401) {
+					alert(err.response.data);
+					navigate("/");
+				}
+
+				alert(err.response.data);
 			});
 	}
 
@@ -68,7 +73,12 @@ export default function Main() {
 				setControl(true);
 			})
 			.catch((err) => {
-				alert(err);
+				if (err.response.status === 401) {
+					alert(err.response.data);
+					navigate("/");
+				}
+
+				alert(err.response.data);
 			});
 	}
 
