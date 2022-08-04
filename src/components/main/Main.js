@@ -72,8 +72,9 @@ export default function Main() {
 			});
 	}
 
-	function openLink(shortUrl) {
-		window.open(`${url.open}/${shortUrl}`);
+	function copyLink(shortUrl) {
+		//window.open(`${url.open}/${shortUrl}`);
+		navigator.clipboard.writeText(`${url.open}/${shortUrl}`);
 		setControl(true);
 	}
 
@@ -93,10 +94,11 @@ export default function Main() {
 			{linksFromUser
 				? linksFromUser.map((item, index) => (
 						<ContainerLinks key={index}>
-							<Links>
-								<div onClick={() => openLink(item.shortUrl)}>{item.url}</div>{" "}
-								<div>{item.shortUrl}</div> <div>{item.counter}</div>
-							</Links>
+							<BoxLinks onClick={() => copyLink(item.shortUrl)}>
+								<Tooltiptext>Copy to clipboard</Tooltiptext>
+								<Links>{item.url}</Links> <div>{item.shortUrl}</div>
+								<div>{item.counter}</div>
+							</BoxLinks>
 							<Delete onClick={() => deleteLink(item.id)}>
 								<img src={trash} alt="trash" />
 							</Delete>
@@ -150,7 +152,7 @@ const ContainerLinks = styled.div`
 	margin-top: 20px;
 `;
 
-const Links = styled.div`
+const BoxLinks = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -160,7 +162,25 @@ const Links = styled.div`
 	box-shadow: 0px 4px 24px rgba(120, 177, 89, 0.12);
 	border-radius: 12px 0px 0px 12px;
 	color: white;
-	padding: 0 10px;
+	padding: 20px;
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+
+	:hover span {
+		visibility: visible;
+		opacity: 0.7;
+	}
+`;
+
+const Links = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	max-width: 350px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 `;
 
 const Delete = styled.div`
@@ -173,4 +193,21 @@ const Delete = styled.div`
 	box-shadow: 0px 4px 24px rgba(120, 177, 89, 0.12);
 	border-radius: 0px 12px 12px 0px;
 	border: 1px solid #80cc74;
+`;
+
+const Tooltiptext = styled.span`
+	visibility: hidden;
+	width: 140px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -75px;
+	opacity: 0;
+	transition: opacity 0.3s;
 `;
