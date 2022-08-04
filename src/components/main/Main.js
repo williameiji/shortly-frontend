@@ -73,9 +73,8 @@ export default function Main() {
 	}
 
 	function copyLink(shortUrl) {
-		//window.open(`${url.open}/${shortUrl}`);
-		navigator.clipboard.writeText(`${url.open}/${shortUrl}`);
 		setControl(true);
+		navigator.clipboard.writeText(`${url.open}/${shortUrl}`);
 	}
 
 	return (
