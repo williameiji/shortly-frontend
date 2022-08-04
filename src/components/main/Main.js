@@ -101,12 +101,12 @@ export default function Main() {
 				<Button type="submit">Encutar link</Button>
 			</Forms>
 			{linksFromUser
-				? linksFromUser.map((item, index) => (
+				? linksFromUser.shortenedUrls.map((item, index) => (
 						<ContainerLinks key={index}>
 							<BoxLinks onClick={() => copyLink(item.shortUrl)}>
 								<Tooltiptext>Copy to clipboard</Tooltiptext>
 								<Links>{item.url}</Links> <div>{item.shortUrl}</div>
-								<div>{item.counter}</div>
+								<div>{item.visitCount}</div>
 							</BoxLinks>
 							<Delete onClick={() => deleteLink(item.id)}>
 								<img src={trash} alt="trash" />
