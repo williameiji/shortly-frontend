@@ -67,7 +67,7 @@ export default function Main() {
 
 	async function deleteLink(id) {
 		await axios
-			.delete(`${url.links}/${id}`, config)
+			.delete(`${url.delete}/${id}`, config)
 			.then((response) => {
 				alert("Link deletado!");
 				setControl(true);
@@ -171,7 +171,7 @@ const BoxLinks = styled.div`
 	box-shadow: 0px 4px 24px rgba(120, 177, 89, 0.12);
 	border-radius: 12px 0px 0px 12px;
 	color: white;
-	padding: 20px;
+	padding: 0 20px;
 	position: relative;
 	cursor: pointer;
 

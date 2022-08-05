@@ -5,6 +5,7 @@ const url = {
 	short: "https://shortly-back.herokuapp.com/urls/shorten",
 	links: "https://shortly-back.herokuapp.com/users/me",
 	open: "https://shortly-back.herokuapp.com/urls/open",
+	delete: "https://shortly-back.herokuapp.com/urls",
 };
 
 export default url;
