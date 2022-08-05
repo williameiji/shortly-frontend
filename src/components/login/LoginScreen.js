@@ -31,7 +31,11 @@ export default function LoginScreen() {
 				navigate("/main");
 			})
 			.catch((err) => {
-				alert(err);
+				if (err.response.status === 401) {
+					alert("Você deve estar registrado!");
+					navigate("/signup");
+				}
+				alert(err.response.data);
 			});
 	}
 
