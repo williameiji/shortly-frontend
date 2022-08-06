@@ -21,10 +21,10 @@ export default function LoginScreen() {
 		setLoginDataInput(loginData);
 	}
 
-	function login(e) {
+	async function login(e) {
 		e.preventDefault();
 
-		axios
+		await axios
 			.post(url.signin, loginDataInput)
 			.then((response) => {
 				setUserInformation(response.data);
@@ -32,10 +32,10 @@ export default function LoginScreen() {
 			})
 			.catch((err) => {
 				if (err.response.status === 401) {
-					alert("Você deve estar registrado!");
-					navigate("/signup");
+					alert("Login/senha inválidos!");
+				} else {
+					alert(err.response.data);
 				}
-				alert(err.response.data);
 			});
 	}
 

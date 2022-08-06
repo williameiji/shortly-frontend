@@ -21,17 +21,21 @@ export default function SignupScreen() {
 		setSingupDataInput(data);
 	}
 
-	function singup(e) {
+	async function singup(e) {
 		e.preventDefault();
 
-		let promise = axios.post(url.signup, singupDataInput);
-		promise
+		await axios
+			.post(url.signup, singupDataInput)
 			.then(() => {
-				navigate("/signin");
 				alert("Cadastro efetuado com sucesso!");
+				navigate("/signin");
 			})
 			.catch((err) => {
-				alert(err.response.data);
+				if (err.response.status === 409) {
+					alert("Usuário já registrado!");
+				} else {
+					alert(err.response.data);
+				}
 			});
 	}
 
