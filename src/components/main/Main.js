@@ -37,9 +37,10 @@ export default function Main() {
 				setLinksFromUser(response.data);
 			})
 			.catch((err) => {
-				alert(err.response.data);
 				if (err.response.status === 401) {
 					navigate("/");
+				} else {
+					alert(err.response.data);
 				}
 			});
 	}
@@ -59,9 +60,9 @@ export default function Main() {
 				if (err.response.status === 401) {
 					alert(err.response.data);
 					navigate("/");
+				} else {
+					alert(err.response.data);
 				}
-
-				alert(err.response.data);
 			});
 	}
 
@@ -76,9 +77,9 @@ export default function Main() {
 				if (err.response.status === 401) {
 					alert(err.response.data);
 					navigate("/");
+				} else {
+					alert(err.response.data);
 				}
-
-				alert(err.response.data);
 			});
 	}
 
@@ -105,7 +106,10 @@ export default function Main() {
 						<ContainerLinks key={index}>
 							<BoxLinks onClick={() => copyLink(item.shortUrl)}>
 								<Tooltiptext>Copy to clipboard</Tooltiptext>
-								<Links>{item.url}</Links> <div>{item.shortUrl}</div>
+								<Links>
+									<p>{item.url}</p>
+								</Links>{" "}
+								<div>{item.shortUrl}</div>
 								<div>{item.visitCount}</div>
 							</BoxLinks>
 							<Delete onClick={() => deleteLink(item.id)}>
@@ -159,6 +163,10 @@ const ContainerLinks = styled.div`
 	justify-content: center;
 	width: 100%;
 	margin-top: 20px;
+
+	:last-child {
+		margin-bottom: 20px;
+	}
 `;
 
 const BoxLinks = styled.div`
@@ -184,11 +192,13 @@ const BoxLinks = styled.div`
 const Links = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	height: 40px;
-	max-width: 350px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	width: 300px;
+
+	p {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 `;
 
 const Delete = styled.div`
